@@ -9,38 +9,114 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GaleriaIndexRouteImport } from './routes/galeria.index'
+import { Route as DocumentosIndexRouteImport } from './routes/documentos.index'
+import { Route as GaleriaMediaIdRouteImport } from './routes/galeria.$mediaId'
+import { Route as DocumentosDocumentIdRouteImport } from './routes/documentos.$documentId'
 
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GaleriaIndexRoute = GaleriaIndexRouteImport.update({
+  id: '/galeria/',
+  path: '/galeria/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentosIndexRoute = DocumentosIndexRouteImport.update({
+  id: '/documentos/',
+  path: '/documentos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriaMediaIdRoute = GaleriaMediaIdRouteImport.update({
+  id: '/galeria/$mediaId',
+  path: '/galeria/$mediaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentosDocumentIdRoute = DocumentosDocumentIdRouteImport.update({
+  id: '/documentos/$documentId',
+  path: '/documentos/$documentId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/documentos/$documentId': typeof DocumentosDocumentIdRoute
+  '/galeria/$mediaId': typeof GaleriaMediaIdRoute
+  '/documentos/': typeof DocumentosIndexRoute
+  '/galeria/': typeof GaleriaIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/documentos/$documentId': typeof DocumentosDocumentIdRoute
+  '/galeria/$mediaId': typeof GaleriaMediaIdRoute
+  '/documentos': typeof DocumentosIndexRoute
+  '/galeria': typeof GaleriaIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/documentos/$documentId': typeof DocumentosDocumentIdRoute
+  '/galeria/$mediaId': typeof GaleriaMediaIdRoute
+  '/documentos/': typeof DocumentosIndexRoute
+  '/galeria/': typeof GaleriaIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/documentos/$documentId'
+    | '/galeria/$mediaId'
+    | '/documentos/'
+    | '/galeria/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/documentos/$documentId'
+    | '/galeria/$mediaId'
+    | '/documentos'
+    | '/galeria'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/documentos/$documentId'
+    | '/galeria/$mediaId'
+    | '/documentos/'
+    | '/galeria/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  DocumentosDocumentIdRoute: typeof DocumentosDocumentIdRoute
+  GaleriaMediaIdRoute: typeof GaleriaMediaIdRoute
+  DocumentosIndexRoute: typeof DocumentosIndexRoute
+  GaleriaIndexRoute: typeof GaleriaIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +124,44 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/galeria/': {
+      id: '/galeria/'
+      path: '/galeria'
+      fullPath: '/galeria/'
+      preLoaderRoute: typeof GaleriaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentos/': {
+      id: '/documentos/'
+      path: '/documentos'
+      fullPath: '/documentos/'
+      preLoaderRoute: typeof DocumentosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria/$mediaId': {
+      id: '/galeria/$mediaId'
+      path: '/galeria/$mediaId'
+      fullPath: '/galeria/$mediaId'
+      preLoaderRoute: typeof GaleriaMediaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentos/$documentId': {
+      id: '/documentos/$documentId'
+      path: '/documentos/$documentId'
+      fullPath: '/documentos/$documentId'
+      preLoaderRoute: typeof DocumentosDocumentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  DocumentosDocumentIdRoute: DocumentosDocumentIdRoute,
+  GaleriaMediaIdRoute: GaleriaMediaIdRoute,
+  DocumentosIndexRoute: DocumentosIndexRoute,
+  GaleriaIndexRoute: GaleriaIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

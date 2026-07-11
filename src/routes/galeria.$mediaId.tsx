@@ -65,7 +65,7 @@ function MediaDetailsPage() {
           </dl>
           {item.tags && item.tags.length > 0 && (
             <div className="mt-4 pt-4 border-t border-hairline flex flex-wrap gap-2">
-              {item.tags.map((t) => (
+              {item.tags.map((t: string) => (
                 <span
                   key={t}
                   className="rounded-full bg-cream px-2.5 py-1 text-xs text-graphite"

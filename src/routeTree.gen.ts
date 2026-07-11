@@ -9,38 +9,147 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as PerfilRouteImport } from './routes/perfil'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as GaleriaIndexRouteImport } from './routes/galeria.index'
+import { Route as DocumentosIndexRouteImport } from './routes/documentos.index'
+import { Route as GaleriaMediaIdRouteImport } from './routes/galeria.$mediaId'
+import { Route as DocumentosDocumentIdRouteImport } from './routes/documentos.$documentId'
+import { Route as Galeria360MediaIdRouteImport } from './routes/galeria.360.$mediaId'
 
+const PerfilRoute = PerfilRouteImport.update({
+  id: '/perfil',
+  path: '/perfil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GaleriaIndexRoute = GaleriaIndexRouteImport.update({
+  id: '/galeria/',
+  path: '/galeria/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentosIndexRoute = DocumentosIndexRouteImport.update({
+  id: '/documentos/',
+  path: '/documentos/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GaleriaMediaIdRoute = GaleriaMediaIdRouteImport.update({
+  id: '/galeria/$mediaId',
+  path: '/galeria/$mediaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentosDocumentIdRoute = DocumentosDocumentIdRouteImport.update({
+  id: '/documentos/$documentId',
+  path: '/documentos/$documentId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const Galeria360MediaIdRoute = Galeria360MediaIdRouteImport.update({
+  id: '/galeria/360/$mediaId',
+  path: '/galeria/360/$mediaId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/perfil': typeof PerfilRoute
+  '/documentos/$documentId': typeof DocumentosDocumentIdRoute
+  '/galeria/$mediaId': typeof GaleriaMediaIdRoute
+  '/documentos/': typeof DocumentosIndexRoute
+  '/galeria/': typeof GaleriaIndexRoute
+  '/galeria/360/$mediaId': typeof Galeria360MediaIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/perfil': typeof PerfilRoute
+  '/documentos/$documentId': typeof DocumentosDocumentIdRoute
+  '/galeria/$mediaId': typeof GaleriaMediaIdRoute
+  '/documentos': typeof DocumentosIndexRoute
+  '/galeria': typeof GaleriaIndexRoute
+  '/galeria/360/$mediaId': typeof Galeria360MediaIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/perfil': typeof PerfilRoute
+  '/documentos/$documentId': typeof DocumentosDocumentIdRoute
+  '/galeria/$mediaId': typeof GaleriaMediaIdRoute
+  '/documentos/': typeof DocumentosIndexRoute
+  '/galeria/': typeof GaleriaIndexRoute
+  '/galeria/360/$mediaId': typeof Galeria360MediaIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/perfil'
+    | '/documentos/$documentId'
+    | '/galeria/$mediaId'
+    | '/documentos/'
+    | '/galeria/'
+    | '/galeria/360/$mediaId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/perfil'
+    | '/documentos/$documentId'
+    | '/galeria/$mediaId'
+    | '/documentos'
+    | '/galeria'
+    | '/galeria/360/$mediaId'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/perfil'
+    | '/documentos/$documentId'
+    | '/galeria/$mediaId'
+    | '/documentos/'
+    | '/galeria/'
+    | '/galeria/360/$mediaId'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  PerfilRoute: typeof PerfilRoute
+  DocumentosDocumentIdRoute: typeof DocumentosDocumentIdRoute
+  GaleriaMediaIdRoute: typeof GaleriaMediaIdRoute
+  DocumentosIndexRoute: typeof DocumentosIndexRoute
+  GaleriaIndexRoute: typeof GaleriaIndexRoute
+  Galeria360MediaIdRoute: typeof Galeria360MediaIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/perfil': {
+      id: '/perfil'
+      path: '/perfil'
+      fullPath: '/perfil'
+      preLoaderRoute: typeof PerfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +157,53 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/galeria/': {
+      id: '/galeria/'
+      path: '/galeria'
+      fullPath: '/galeria/'
+      preLoaderRoute: typeof GaleriaIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentos/': {
+      id: '/documentos/'
+      path: '/documentos'
+      fullPath: '/documentos/'
+      preLoaderRoute: typeof DocumentosIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria/$mediaId': {
+      id: '/galeria/$mediaId'
+      path: '/galeria/$mediaId'
+      fullPath: '/galeria/$mediaId'
+      preLoaderRoute: typeof GaleriaMediaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documentos/$documentId': {
+      id: '/documentos/$documentId'
+      path: '/documentos/$documentId'
+      fullPath: '/documentos/$documentId'
+      preLoaderRoute: typeof DocumentosDocumentIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galeria/360/$mediaId': {
+      id: '/galeria/360/$mediaId'
+      path: '/galeria/360/$mediaId'
+      fullPath: '/galeria/360/$mediaId'
+      preLoaderRoute: typeof Galeria360MediaIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  PerfilRoute: PerfilRoute,
+  DocumentosDocumentIdRoute: DocumentosDocumentIdRoute,
+  GaleriaMediaIdRoute: GaleriaMediaIdRoute,
+  DocumentosIndexRoute: DocumentosIndexRoute,
+  GaleriaIndexRoute: GaleriaIndexRoute,
+  Galeria360MediaIdRoute: Galeria360MediaIdRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PerfilRouteImport } from './routes/perfil'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ComponentLibraryRouteImport } from './routes/component-library'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as GaleriaIndexRouteImport } from './routes/galeria.index'
 import { Route as DocumentosIndexRouteImport } from './routes/documentos.index'
@@ -26,6 +27,11 @@ const PerfilRoute = PerfilRouteImport.update({
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentLibraryRoute = ComponentLibraryRouteImport.update({
+  id: '/component-library',
+  path: '/component-library',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -61,6 +67,7 @@ const Galeria360MediaIdRoute = Galeria360MediaIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/component-library': typeof ComponentLibraryRoute
   '/dashboard': typeof DashboardRoute
   '/perfil': typeof PerfilRoute
   '/documentos/$documentId': typeof DocumentosDocumentIdRoute
@@ -71,6 +78,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/component-library': typeof ComponentLibraryRoute
   '/dashboard': typeof DashboardRoute
   '/perfil': typeof PerfilRoute
   '/documentos/$documentId': typeof DocumentosDocumentIdRoute
@@ -82,6 +90,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/component-library': typeof ComponentLibraryRoute
   '/dashboard': typeof DashboardRoute
   '/perfil': typeof PerfilRoute
   '/documentos/$documentId': typeof DocumentosDocumentIdRoute
@@ -94,6 +103,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/component-library'
     | '/dashboard'
     | '/perfil'
     | '/documentos/$documentId'
@@ -104,6 +114,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/component-library'
     | '/dashboard'
     | '/perfil'
     | '/documentos/$documentId'
@@ -114,6 +125,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/component-library'
     | '/dashboard'
     | '/perfil'
     | '/documentos/$documentId'
@@ -125,6 +137,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComponentLibraryRoute: typeof ComponentLibraryRoute
   DashboardRoute: typeof DashboardRoute
   PerfilRoute: typeof PerfilRoute
   DocumentosDocumentIdRoute: typeof DocumentosDocumentIdRoute
@@ -148,6 +161,13 @@ declare module '@tanstack/react-router' {
       path: '/dashboard'
       fullPath: '/dashboard'
       preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/component-library': {
+      id: '/component-library'
+      path: '/component-library'
+      fullPath: '/component-library'
+      preLoaderRoute: typeof ComponentLibraryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -197,6 +217,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComponentLibraryRoute: ComponentLibraryRoute,
   DashboardRoute: DashboardRoute,
   PerfilRoute: PerfilRoute,
   DocumentosDocumentIdRoute: DocumentosDocumentIdRoute,

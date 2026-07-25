@@ -1,0 +1,16 @@
+[
+  {
+    "id": "u_001",
+    "name": "João Ferreira",
+    "email": "joao.ferreira@email.com",
+    "phone": "(17) 99123-4567",
+    "password": "ecora2026"
+  },
+  {
+    "id": "u_002",
+    "name": "Maria Silva",
+    "email": "maria.silva@email.com",
+    "phone": "(17) 99123-4568",
+    "password": "ecora2026"
+  }
+]
